@@ -1,0 +1,36 @@
+import {ColorValue} from 'react-native';
+
+export type Pointer = {
+  height?: number;
+  width?: number;
+  radius?: number;
+  pointerColor?: ColorValue;
+  pointer1Color?: ColorValue;
+  pointer2Color?: ColorValue;
+  pointer3Color?: ColorValue;
+  pointer4Color?: ColorValue;
+  pointer5Color?: ColorValue;
+  pointerComponent?: Function;
+  showPointerStrip?: boolean;
+  pointerStripWidth?: number;
+  pointerStripHeight?: number;
+  pointerStripColor?: ColorValue;
+  pointerStripUptoDataPoint?: boolean;
+  pointerLabelComponent?: Function;
+  stripOverPointer?: boolean;
+  autoAdjustPointerLabelPosition?: boolean;
+  shiftPointerLabelX?: number;
+  shiftPointerLabelY?: number;
+  pointerLabelWidth?: number;
+  pointerLabelHeight?: number;
+  pointerVanishDelay?: number;
+  activatePointersOnLongPress?: boolean;
+  activatePointersDelay?: number;
+  hidePointer1?: boolean;
+  hidePointer2?: boolean;
+  hidePointer3?: boolean;
+  hidePointer4?: boolean;
+  hidePointer5?: boolean;
+  strokeDashArray?: Array<number>;
+  listenerFunc: Function;
+};

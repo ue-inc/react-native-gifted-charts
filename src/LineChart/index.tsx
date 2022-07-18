@@ -12,7 +12,6 @@ import {
   Animated,
   Easing,
   Text,
-  ColorValue,
   Dimensions,
 } from 'react-native';
 import {styles} from './styles';
@@ -27,371 +26,12 @@ import Svg, {
 } from 'react-native-svg';
 import {svgPath, bezierCommand} from '../utils';
 import Rule from '../Components/lineSvg';
+import {Properties, Pointer, DataItemType} from './types';
 
 let initialData = null;
 let animations = [];
 
-type propTypes = {
-  height?: number;
-  noOfSections?: number;
-  maxValue?: number;
-  minValue?: number;
-  stepHeight?: number;
-  stepValue?: number;
-  spacing?: number;
-  initialSpacing?: number;
-  data?: Array<itemType>;
-  data2?: Array<itemType>;
-  data3?: Array<itemType>;
-  data4?: Array<itemType>;
-  data5?: Array<itemType>;
-  zIndex1?: number;
-  zIndex2?: number;
-  zIndex3?: number;
-  zIndex4?: number;
-  zIndex5?: number;
-  thickness?: number;
-  thickness1?: number;
-  thickness2?: number;
-  thickness3?: number;
-  thickness4?: number;
-  thickness5?: number;
-  strokeDashArray?: Array<number>;
-  strokeDashArray1?: Array<number>;
-  strokeDashArray2?: Array<number>;
-  strokeDashArray3?: Array<number>;
-  strokeDashArray4?: Array<number>;
-  strokeDashArray5?: Array<number>;
-  rotateLabel?: Boolean;
-  isAnimated?: Boolean;
-  animateOnDataChange?: Boolean;
-  animationDuration?: number;
-  onDataChangeAnimationDuration?: number;
-  animationEasing?: any;
-  animateTogether?: boolean;
-  xAxisLength?: number;
-  xAxisThickness?: number;
-  xAxisColor?: ColorValue;
-  xAxisType?: String;
-  hideRules?: Boolean;
-  rulesLength?: number;
-  rulesColor?: ColorValue;
-  rulesThickness?: number;
-  pressEnabled?: Boolean;
-  showDataPointOnPress?: Boolean;
-  showStripOnPress?: Boolean;
-  showTextOnPress?: Boolean;
-  stripHeight?: number;
-  stripWidth?: number;
-  stripColor?: ColorValue | String | any;
-  stripOpacity?: number;
-  onPress?: Function;
-  unFocusOnPressOut?: Boolean;
-  delayBeforeUnFocus?: number;
-
-  rulesType?: String;
-  dashWidth?: number;
-  dashGap?: number;
-  showReferenceLine1?: Boolean;
-  referenceLine1Config?: referenceConfigType;
-  referenceLine1Position?: number;
-  showReferenceLine2?: Boolean;
-  referenceLine2Config?: referenceConfigType;
-  referenceLine2Position?: number;
-  showReferenceLine3?: Boolean;
-  referenceLine3Config?: referenceConfigType;
-  referenceLine3Position?: number;
-  showReferenceLine4?: Boolean;
-  referenceLine4Config?: referenceConfigType;
-  referenceLine4Position?: number;
-  showReferenceLine5?: Boolean;
-  referenceLine5Config?: referenceConfigType;
-  referenceLine5Position?: number;
-
-  showVerticalLines?: Boolean;
-  verticalLinesUptoDataPoint?: Boolean;
-  verticalLinesThickness?: number;
-  verticalLinesHeight?: number;
-  verticalLinesColor?: ColorValue;
-  verticalLinesZIndex?: number;
-  noOfVerticalLines?: number;
-  verticalLinesSpacing?: number;
-  hideAxesAndRules?: Boolean;
-  areaChart?: Boolean;
-
-  disableScroll?: Boolean;
-  pointerConfig?: Pointer;
-  showScrollIndicator?: Boolean;
-  indicatorColor?: 'black' | 'default' | 'white';
-
-  //Indices
-
-  showYAxisIndices?: Boolean;
-  showXAxisIndices?: Boolean;
-  yAxisIndicesHeight?: number;
-  xAxisIndicesHeight?: number;
-  yAxisIndicesWidth?: number;
-  xAxisIndicesWidth?: number;
-  xAxisIndicesColor?: ColorValue;
-  yAxisIndicesColor?: ColorValue;
-  yAxisSide?: string;
-  yAxisOffset?: number;
-
-  startIndex?: number;
-  startIndex1?: number;
-  startIndex2?: number;
-  startIndex3?: number;
-  startIndex4?: number;
-  startIndex5?: number;
-  endIndex?: number;
-  endIndex1?: number;
-  endIndex2?: number;
-  endIndex3?: number;
-  endIndex4?: number;
-  endIndex5?: number;
-
-  color?: string;
-  color1?: string;
-  color2?: string;
-  color3?: string;
-  color4?: string;
-  color5?: string;
-  yAxisThickness?: number;
-  yAxisColor?: ColorValue;
-  yAxisLabelContainerStyle?: any;
-  horizontalRulesStyle?: any;
-  yAxisTextStyle?: any;
-  yAxisTextNumberOfLines?: number;
-  xAxisTextNumberOfLines?: number;
-  showFractionalValues?: Boolean;
-  roundToDigits?: number;
-  yAxisLabelWidth?: number;
-  hideYAxisText?: Boolean;
-
-  backgroundColor?: ColorValue;
-  curved?: Boolean;
-  horizSections?: Array<sectionType>;
-
-  //Data points
-
-  hideDataPoints?: Boolean;
-  dataPointsHeight?: number;
-  dataPointsWidth?: number;
-  dataPointsRadius?: number;
-  dataPointsColor?: string;
-  dataPointsShape?: string;
-  hideDataPoints1?: Boolean;
-  dataPointsHeight1?: number;
-  dataPointsWidth1?: number;
-  dataPointsRadius1?: number;
-  dataPointsColor1?: string;
-  dataPointsShape1?: string;
-  hideDataPoints2?: Boolean;
-  dataPointsHeight2?: number;
-  dataPointsWidth2?: number;
-  dataPointsRadius2?: number;
-  dataPointsColor2?: string;
-  dataPointsShape2?: string;
-  hideDataPoints3?: Boolean;
-  dataPointsHeight3?: number;
-  dataPointsWidth3?: number;
-  dataPointsRadius3?: number;
-  dataPointsColor3?: string;
-  dataPointsShape3?: string;
-  hideDataPoints4?: Boolean;
-  dataPointsHeight4?: number;
-  dataPointsWidth4?: number;
-  dataPointsRadius4?: number;
-  dataPointsColor4?: string;
-  dataPointsShape4?: string;
-  hideDataPoints5?: Boolean;
-  dataPointsHeight5?: number;
-  dataPointsWidth5?: number;
-  dataPointsRadius5?: number;
-  dataPointsColor5?: string;
-  dataPointsShape5?: string;
-  customDataPoint?: Function;
-
-  focusedDataPointShape?: String;
-  focusedDataPointWidth?: number;
-  focusedDataPointHeight?: number;
-  focusedDataPointColor?: ColorValue | String | any;
-  focusedDataPointRadius?: number;
-  focusedCustomDataPoint?: Function;
-  dataPointLabelWidth?: number;
-  dataPointLabelShiftX?: number;
-  dataPointLabelShiftY?: number;
-
-  startFillColor?: string;
-  endFillColor?: string;
-  startOpacity?: number;
-  endOpacity?: number;
-  startFillColor1?: string;
-  endFillColor1?: string;
-  startOpacity1?: number;
-  endOpacity1?: number;
-  startFillColor2?: string;
-  endFillColor2?: string;
-  startOpacity2?: number;
-  endOpacity2?: number;
-  startFillColor3?: string;
-  endFillColor3?: string;
-  startOpacity3?: number;
-  endOpacity3?: number;
-  startFillColor4?: string;
-  endFillColor4?: string;
-  startOpacity4?: number;
-  endOpacity4?: number;
-  startFillColor5?: string;
-  endFillColor5?: string;
-  startOpacity5?: number;
-  endOpacity5?: number;
-  gradientDirection?: string;
-
-  textFontSize?: number;
-  textColor?: string;
-  textFontSize1?: number;
-  textColor1?: string;
-  textFontSize2?: number;
-  textColor2?: string;
-  textFontSize3?: number;
-  textColor3?: string;
-  textFontSize4?: number;
-  textColor4?: string;
-  textFontSize5?: number;
-  textColor5?: string;
-  hideOrigin?: Boolean;
-  textShiftX?: number;
-  textShiftY?: number;
-  yAxisLabelTexts?: Array<string>;
-  xAxisLabelTexts?: Array<string>;
-  xAxisLabelTextStyle?: any;
-  width?: number;
-  yAxisLabelPrefix?: String;
-  yAxisLabelSuffix?: String;
-  scrollToEnd?: Boolean;
-  scrollAnimation?: Boolean;
-  noOfSectionsBelowXAxis?: number;
-  labelsExtraHeight?: number;
-  adjustToWidth?: Boolean;
-  getPointerProps?: Function;
-  showArrows?: boolean;
-  arrowConfig?: arrowType;
-  showArrow1?: boolean;
-  arrowConfig1?: arrowType;
-  showArrow2?: boolean;
-  arrowConfig2?: arrowType;
-  showArrow3?: boolean;
-  arrowConfig3?: arrowType;
-  showArrow4?: boolean;
-  arrowConfig4?: arrowType;
-  showArrow5?: boolean;
-  arrowConfig5?: arrowType;
-};
-type arrowType = {
-  length?: number;
-  width?: number;
-  strokeWidth?: number;
-  strokeColor?: string;
-  fillColor?: string;
-  showArrowBase?: boolean;
-};
-type referenceConfigType = {
-  thickness: number;
-  width: number;
-  color: ColorValue | String | any;
-  type: String;
-  dashWidth: number;
-  dashGap: number;
-  labelText: String;
-  labelTextStyle: any;
-};
-type itemType = {
-  value?: number;
-  label: String;
-  labelComponent: Function;
-  labelTextStyle?: any;
-  dataPointText?: string;
-  textShiftX?: number;
-  textShiftY?: number;
-  textColor?: string;
-  textFontSize?: number;
-
-  hideDataPoint?: Boolean;
-  dataPointHeight?: number;
-  dataPointWidth?: number;
-  dataPointRadius?: number;
-  dataPointColor?: string;
-  dataPointShape?: string;
-  customDataPoint?: Function;
-
-  stripHeight?: number;
-  stripWidth?: number;
-  stripColor?: ColorValue | String | any;
-  stripOpacity?: number;
-
-  focusedDataPointShape?: String;
-  focusedDataPointWidth?: number;
-  focusedDataPointHeight?: number;
-  focusedDataPointColor?: ColorValue | String | any;
-  focusedDataPointRadius?: number;
-  focusedCustomDataPoint?: Function;
-
-  dataPointLabelComponent?: Function;
-  focusedDataPointLabelComponent?: Function;
-  dataPointLabelWidth?: number;
-  dataPointLabelShiftX?: number;
-  dataPointLabelShiftY?: number;
-  showStrip?: Boolean;
-
-  showVerticalLine?: Boolean;
-  verticalLineUptoDataPoint?: Boolean;
-  verticalLineColor?: string;
-  verticalLineThickness?: number;
-  pointerShiftX?: number;
-  pointerShiftY?: number;
-  onPress?: Function;
-};
-
-type sectionType = {
-  value: string;
-};
-
-type Pointer = {
-  height?: number;
-  width?: number;
-  radius?: number;
-  pointerColor?: ColorValue;
-  pointer1Color?: ColorValue;
-  pointer2Color?: ColorValue;
-  pointer3Color?: ColorValue;
-  pointer4Color?: ColorValue;
-  pointer5Color?: ColorValue;
-  pointerComponent?: Function;
-  showPointerStrip?: boolean;
-  pointerStripWidth?: number;
-  pointerStripHeight?: number;
-  pointerStripColor?: ColorValue;
-  pointerStripUptoDataPoint?: boolean;
-  pointerLabelComponent?: Function;
-  stripOverPointer?: boolean;
-  autoAdjustPointerLabelPosition?: boolean;
-  shiftPointerLabelX?: number;
-  shiftPointerLabelY?: number;
-  pointerLabelWidth?: number;
-  pointerLabelHeight?: number;
-  pointerVanishDelay?: number;
-  activatePointersOnLongPress?: boolean;
-  activatePointersDelay?: number;
-  hidePointer1?: boolean;
-  hidePointer2?: boolean;
-  hidePointer3?: boolean;
-  hidePointer4?: boolean;
-  hidePointer5?: boolean;
-  strokeDashArray?: Array<number>;
-};
-
-export const LineChart = (props: propTypes) => {
+export const LineChart = (props: Properties) => {
   const scrollRef = useRef();
   const [scrollX, setScrollX] = useState(0);
   const [arrow1Points, setArrow1Points] = useState('');
@@ -441,6 +81,17 @@ export const LineChart = (props: propTypes) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const containerHeight = props.height || 200;
   const noOfSections = props.noOfSections || 10;
+
+  useEffect(() => {
+    pointerListenerFunc([
+      pointerItem,
+      pointerItem2,
+      pointerItem3,
+      pointerItem4,
+      pointerItem5,
+    ]);
+  }, [pointerItem, pointerItem2, pointerItem3, pointerItem4, pointerItem5]);
+
   let data = useMemo(() => {
     if (!props.data) {
       return [];
@@ -784,7 +435,7 @@ export const LineChart = (props: propTypes) => {
   let totalWidth = initialSpacing;
   let maxItem = 0,
     minItem = 0;
-  data.forEach((item: itemType) => {
+  data.forEach((item: DataItemType) => {
     if (item.value > maxItem) {
       maxItem = item.value;
     }
@@ -1843,7 +1494,7 @@ export const LineChart = (props: propTypes) => {
 
   const backgroundColor = props.backgroundColor || 'transparent';
 
-  const defaultPointerConfig = {
+  const defaultPointerConfig: Pointer = {
     height: 0,
     width: 0,
     radius: 5,
@@ -1869,7 +1520,9 @@ export const LineChart = (props: propTypes) => {
     hidePointer3: false,
     hidePointer4: false,
     hidePointer5: false,
+    listenerFunc: null,
   };
+
   const pointerConfig = props.pointerConfig || null;
   const getPointerProps = props.getPointerProps || null;
   const pointerHeight =
@@ -1892,7 +1545,6 @@ export const LineChart = (props: propTypes) => {
     pointerConfig && pointerConfig.pointerComponent
       ? pointerConfig.pointerComponent
       : defaultPointerConfig.pointerComponent;
-
   const showPointerStrip =
     pointerConfig && pointerConfig.showPointerStrip === false
       ? false
@@ -1917,6 +1569,10 @@ export const LineChart = (props: propTypes) => {
     pointerConfig && pointerConfig.pointerLabelComponent
       ? pointerConfig.pointerLabelComponent
       : defaultPointerConfig.pointerLabelComponent;
+  const pointerListenerFunc =
+    pointerConfig && pointerConfig.listenerFunc
+      ? pointerConfig.listenerFunc
+      : defaultPointerConfig.listenerFunc;
   const stripOverPointer =
     pointerConfig && pointerConfig.stripOverPointer
       ? pointerConfig.stripOverPointer
@@ -2627,7 +2283,7 @@ export const LineChart = (props: propTypes) => {
     startIndex,
     endIndex,
   ) => {
-    return dataForRender.map((item: itemType, index: number) => {
+    return dataForRender.map((item: DataItemType, index: number) => {
       if (index < startIndex || index > endIndex) return null;
       if (item.hideDataPoint) {
         return null;
@@ -2869,7 +2525,7 @@ export const LineChart = (props: propTypes) => {
   };
 
   const renderSpecificVerticalLines = (dataForRender: any) => {
-    return dataForRender.map((item: itemType, index: number) => {
+    return dataForRender.map((item: DataItemType, index: number) => {
       if (item.showVerticalLine) {
         return (
           <Rect
@@ -3788,7 +3444,7 @@ export const LineChart = (props: propTypes) => {
           props.width && {width: props.width + 10},
         ]}>
         {showVerticalLines &&
-          verticalLinesAr.map((item: itemType, index: number) => {
+          verticalLinesAr.map((item: DataItemType, index: number) => {
             return (
               <View
                 key={index}
@@ -3815,7 +3471,7 @@ export const LineChart = (props: propTypes) => {
           })}
 
         {showYAxisIndices &&
-          data.map((item: itemType, index: number) => {
+          data.map((item: DataItemType, index: number) => {
             return (
               <View
                 key={index + '' + item.value}
@@ -4041,7 +3697,7 @@ export const LineChart = (props: propTypes) => {
             {stripOverPointer && renderStripAndLabel()}
           </View>
         ) : null}
-        {data.map((item: itemType, index: number) => {
+        {data.map((item: DataItemType, index: number) => {
           // console.log('item', item)
           return (
             <View key={index}>
