@@ -13,13 +13,10 @@
     "test": "jest",
     "lint": "eslint ."
   },
-  "repository": "https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts",
+  "repository": "https://github.com/ue-inc/react-native-gifted-charts",
   "author": "Abhinandan Kushwaha <kushabhi5@gmail.com> (https://github.com/Abhinandan-Kushwaha)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues"
-  },
-  "homepage": "https://gifted-charts.web.app/",
+  "homepage": "https://github.com/ue-inc/react-native-gifted-charts",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
