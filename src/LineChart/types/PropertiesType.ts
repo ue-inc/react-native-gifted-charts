@@ -243,6 +243,7 @@ export type Properties = {
   scrollToEnd?: Boolean;
   scrollAnimation?: Boolean;
   noOfSectionsBelowXAxis?: number;
+  currencyFormatLabel: boolean;
   labelsExtraHeight?: number;
   adjustToWidth?: Boolean;
   getPointerProps?: Function;
