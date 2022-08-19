@@ -465,7 +465,7 @@ export const LineChart = (props: Properties) => {
     }
   }
 
-  const maxValue = props.maxValue || maxItem;
+  const maxValue = props.maxValue || maxItem * 1.1;
   const minValue = props.minValue || minItem;
 
   useEffect(() => {
@@ -1905,7 +1905,7 @@ export const LineChart = (props: Properties) => {
     }
 
     if (currencyFormatLabel) {
-      return yAxisLabelPrefix + numberFormatter(parseFloat(label) || 0, 0) + yAxisLabelSuffix;
+      return yAxisLabelPrefix + numberFormatter(parseFloat(label) || 0, 1) + yAxisLabelSuffix;
     }
     else {
       return yAxisLabelPrefix + label + yAxisLabelSuffix;
